@@ -22,19 +22,24 @@
 const case1 = ["flower", "flow", "flight"];
 const case2 = ["dog", "racecar", "car"];
 const case3 = ["dimas", "dia", "dina"];
+const case4 = ["dimas", "dimsum", "dimana"];
 
 var longestCommonPrefix = function (strs) {
-  let initial = [];
+  if (!strs.length) return "";
+
+  let prefix = strs[0];
+
   for (let i = 0; i < strs.length; i++) {
-    initial.push(strs[i].substring(0, 2));
+    while (strs[i].indexOf(prefix) !== 0) {
+      prefix = prefix.slice(0, -1);
+      if (!prefix) return "";
+    }
   }
 
-  const uniqueItems = new Set(initial);
-  const hasDuplicate = uniqueItems.size !== initial.length;
-
-  return hasDuplicate ? initial[0] : "";
+  return prefix;
 };
 
 console.log(longestCommonPrefix(case1));
 console.log(longestCommonPrefix(case2));
 console.log(longestCommonPrefix(case3));
+console.log(longestCommonPrefix(case4));
